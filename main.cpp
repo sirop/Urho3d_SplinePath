@@ -165,7 +165,7 @@ public:
         camera->SetFarClip(2000);
         camera->SetNearClip(1.0f);
         camera->SetOrthographic(false);
-        cameraNode_->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+        cameraNode_->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 
         pathNode = scene_->CreateChild("PathNode");
         path = pathNode->CreateComponent<SplinePath>();
@@ -177,6 +177,8 @@ public:
         targetNode->SetPosition(cameraNode_->GetPosition() +Vector3(0.0f, 0.0f, 10.0f));
 
         path->SetInterpolationMode(LINEAR_CURVE);
+        path->AddControlPoint(startNode, 0);
+        path->AddControlPoint(targetNode, 1);
         path->SetSpeed(0.10f);
         path->SetControlledNode(cameraNode_);
         path->Reset();
