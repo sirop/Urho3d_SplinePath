@@ -13,7 +13,7 @@ QMAKE_CFLAGS_RELEASE += /MT
 #QMAKE_CXXFLAGS_RELEASE = /MT
 
 
-TARGET = Wheels
+TARGET = Spline
 
 #This might be an overkill but I just added all of them as I saw them in the pkgconfig file
 #it is for a release build with static library linkage and having angelscript enabled
