@@ -174,12 +174,15 @@ public:
         startNode->SetPosition(cameraNode_->GetPosition());
         // Target point
         Node* targetNode = scene_->CreateChild("Target");
-        targetNode->SetPosition(cameraNode_->GetPosition() +Vector3(0.0f, 0.0f, 10.0f));
+        targetNode->SetPosition(cameraNode_->GetPosition() +Vector3(0.0f, 0.0f, 20.0f));
+//        Node* targetNode1 = scene_->CreateChild("Target1");
+//        targetNode->SetPosition(cameraNode_->GetPosition() +Vector3(0.0f, 10.0f, 10.0f));
 
-        path->SetInterpolationMode(LINEAR_CURVE);
+        path->SetInterpolationMode(CATMULL_ROM_FULL_CURVE);
         path->AddControlPoint(startNode, 0);
         path->AddControlPoint(targetNode, 1);
-        path->SetSpeed(0.10f);
+        //path->AddControlPoint(targetNode1, 2);
+        path->SetSpeed(1.10f);
         path->SetControlledNode(cameraNode_);
         path->Reset();
 
@@ -191,8 +194,8 @@ public:
             lightNode->Pitch(10);   // vertical
             Light* light=lightNode->CreateComponent<Light>();
             light->SetLightType(LIGHT_DIRECTIONAL);
-            light->SetBrightness(1.6);
-            light->SetColor(Color(1.0,.6,0.3,1));
+            light->SetBrightness(1.6f);
+            light->SetColor(Color(1.0f,.6f,0.3f,1.0f));
             light->SetCastShadows(true);
         }
         // Create a blue point light
@@ -202,7 +205,7 @@ public:
             Light* light=lightNode->CreateComponent<Light>();
             light->SetLightType(LIGHT_POINT);
             light->SetRange(25);
-            light->SetBrightness(1.7);
+            light->SetBrightness(1.7f);
             light->SetColor(Color(0.5,.5,1.0,1));
             light->SetCastShadows(true);
         }
@@ -371,6 +374,10 @@ public:
            path->Move( timeStep);
            // Vector3 infCameraTranslation = (path->GetPosition () -cameraNode_->GetPosition()).Normalized();
            // cameraNode_->Translate(infCameraTranslation*path->GetSpeed()*timeStep);
+        }
+        else
+        {
+            path->Reset();
         }
     }
     /**
